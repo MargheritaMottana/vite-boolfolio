@@ -15,11 +15,19 @@ export default{
 </script>
 
 <template>
+
   <header>
-    <h1>
-      Vite Boolfolio
-    </h1>
+
+    <div class="container py-5">
+
+      <h1>
+        Vite Boolfolio
+      </h1>
+
+    </div>
+
   </header>
+
 </template>
 
 <style scoped>

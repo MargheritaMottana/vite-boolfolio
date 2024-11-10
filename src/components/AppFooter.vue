@@ -15,9 +15,19 @@ export default{
 </script>
 
 <template>
-  <footer>
-    Footer
-  </footer>
+
+  <header>
+
+    <div class="container py-5">
+
+      <p>
+        Footer
+      </p>
+      
+    </div>
+
+  </header>
+
 </template>
 
 <style scoped>
