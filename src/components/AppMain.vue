@@ -9,6 +9,7 @@ export default{
       projects:[],
       prevPage: null,
       nextPage: null,
+      clickedButton: false,
     };
   },
   // per far partire la chiamata la devo richiamare
@@ -29,7 +30,9 @@ export default{
           this.nextPage = res.data.projects.next_page_url;
         });
     },
+    // bottone prev
     toPrevPage(){
+      this.clickedButton = true;
       axios
         .get(this.prevPage)
         .then((res)=>{
@@ -39,9 +42,13 @@ export default{
           // bottoni
           this.prevPage = res.data.projects.prev_page_url;
           this.nextPage = res.data.projects.next_page_url;
+
+          this.clickedButton = false;
         });
     },
+    // bottone next
     toNextPage(){
+      this.clickedButton = true;
       axios
         .get(this.nextPage)
         .then((res)=>{
@@ -51,6 +58,8 @@ export default{
           // bottoni
           this.prevPage = res.data.projects.prev_page_url;
           this.nextPage = res.data.projects.next_page_url;
+
+          this.clickedButton = false;
         });
     },
   },
@@ -68,7 +77,7 @@ export default{
 
         <div class="col" v-for="project in projects" :key="project.id">
 
-          <div class="card mb-4" style="width: 18rem;">
+          <div class="card mb-4">
 
             <img :src="project.cover" class="card-img-top" :alt="project.title">
 
@@ -97,8 +106,21 @@ export default{
 
         <div class="d-flex justify-content-center">
 
-          <button @click="toPrevPage()" type="button" class="btn btn-primary m-2">⁠☜(⸝⸝•ᴗ•⸝⸝ ⁠☜) Prev</button>
-          <button @click="toNextPage()" type="button" class="btn btn-primary m-2">Next (☞ ⸝⸝•ᴗ•⸝⸝)⁠☞</button>
+          <button 
+            @click="toPrevPage()"
+            :disabled="prevPage == null || clickedButton" 
+            type="button" 
+            class="btn btn-primary m-2">
+            ⁠☜(⸝⸝•ᴗ•⸝⸝ ⁠☜) Prev
+          </button>
+
+          <button
+            @click="toNextPage()"
+            :disabled="nextPage == null || clickedButton" 
+            type="button"
+            class="btn btn-primary m-2">
+            Next (☞ ⸝⸝•ᴗ•⸝⸝)⁠☞
+          </button>
 
         </div>
 
