@@ -5,3 +5,9 @@
 
   font-family: sans-serif;
 }
+
+h1,
+h5 {
+  font-weight: bold;
+  font-family: "Libre Baskerville"
+}
