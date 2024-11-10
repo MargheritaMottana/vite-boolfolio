@@ -7,6 +7,8 @@ export default{
   data(){
     return{
       projects:[],
+      prevPage: null,
+      nextPage: null,
     };
   },
   // per far partire la chiamata la devo richiamare
@@ -21,8 +23,36 @@ export default{
         .then((res)=>{
           this.projects = res.data.projects.data;
           console.log(this.projects);
+
+          // bottoni
+          this.prevPage = res.data.projects.prev_page_url;
+          this.nextPage = res.data.projects.next_page_url;
         });
-    }
+    },
+    toPrevPage(){
+      axios
+        .get(this.prevPage)
+        .then((res)=>{
+          this.projects = res.data.projects.data;
+          console.log(this.projects);
+
+          // bottoni
+          this.prevPage = res.data.projects.prev_page_url;
+          this.nextPage = res.data.projects.next_page_url;
+        });
+    },
+    toNextPage(){
+      axios
+        .get(this.nextPage)
+        .then((res)=>{
+          this.projects = res.data.projects.data;
+          console.log(this.projects);
+
+          // bottoni
+          this.prevPage = res.data.projects.prev_page_url;
+          this.nextPage = res.data.projects.next_page_url;
+        });
+    },
   },
 }
 
@@ -43,7 +73,10 @@ export default{
             <img :src="project.cover" class="card-img-top" :alt="project.title">
 
             <div class="card-body">
-                <h5 class="card-title">{{project.title}}</h5>
+                <h5 class="card-title">
+                  {{project.id}}) {{project.title}}
+                </h5>
+
                 <p class="card-text">{{project.description}}</p>
 
                 <div class="mb-3" v-if="project.type !=null">
@@ -59,6 +92,13 @@ export default{
             </div>
 
           </div>
+
+        </div>
+
+        <div class="d-flex justify-content-center">
+
+          <button @click="toPrevPage()" type="button" class="btn btn-primary m-2">⁠☜(⸝⸝•ᴗ•⸝⸝ ⁠☜) Prev</button>
+          <button @click="toNextPage()" type="button" class="btn btn-primary m-2">Next (☞ ⸝⸝•ᴗ•⸝⸝)⁠☞</button>
 
         </div>
 

@@ -18,9 +18,9 @@ export default{
 
   <header>
 
-    <div class="container py-5">
+    <div class="container mt-5 text-center">
 
-      <h1>
+      <h1 class="text-primary">
         Vite Boolfolio
       </h1>
 
